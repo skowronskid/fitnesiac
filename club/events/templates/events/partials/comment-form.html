@@ -1,0 +1,10 @@
+
+<form action="" method=POST hx-post="{% if url %}{{ url }}{% else %}.{% endif %}" hx-swap="innerHTML">
+    {% csrf_token %}
+    
+    {{form.as_p}}
+    
+
+    <input type="submit" value="Save" class="btn btn-secondary">
+    
+</form> 

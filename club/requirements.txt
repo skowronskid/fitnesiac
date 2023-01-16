@@ -1,0 +1,7 @@
+Django>=3.2
+pint
+django-htmx
+pillow
+requests
+django-utils-six
+django-crispy-forms

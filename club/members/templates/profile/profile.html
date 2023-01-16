@@ -1,0 +1,64 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+
+
+<br>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class = "card card-body">
+            
+            <hr>
+            <h3 style="text-align: center;"> {{ userprofile.username }}  </h3>
+            <hr>
+            <img class="profile-photo" src="{{userprofile.photo.url}}">
+            <hr>
+            <center>
+            {% if  user.is_authenticated %} 
+                
+                {% if request.user == userprofile.user %}
+
+                {% else %}
+                    {% if userprofile in request.user.userprofile.follows.all %}
+                        {% include "profile/partials/unfollow.html"%}
+                    {% else %}
+                        {% include "profile/partials/follow.html"%}
+                    {% endif %}
+
+                {% endif %}
+            {% endif %}
+            
+            {% if request.user == userprofile.user %}
+            <p><a class="btn btn-primary" href='{% url "settings" %}'> Settings</a></p>
+
+            <p><a class="btn btn-secondary btn-sm" href="{% url 'api_view' %}">Get your training Data</a></p>
+            {% endif %}
+            </center>
+
+        </div>
+    </div>
+
+    <div class = 'col-md-9'>
+        <div class = 'card card-body'>
+            <h1>My Trainings</h1>
+            <hr>
+
+                {% for training in trainings %}
+                    
+                    {% include 'events/training_card.html' with object=training %}
+                    
+                {% endfor %}
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+{% endblock %}

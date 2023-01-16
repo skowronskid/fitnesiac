@@ -1,0 +1,34 @@
+<div id="training-{{object.id}}">
+    <form>
+        <fieldset disabled>
+            <div class="row">
+                <div class="col-4">
+                    <label for="name">Training name:</label>
+                    <input type="text" id="name" class="form-control" value="{{ object.name }}">
+                </div> 
+                <div class="col-4">
+                    <label for="date">Date:</label>
+                    <input id="date" class="form-control" value="{{ object.date }}">
+                </div>
+                <div class="col-2">
+                    <label for="duration">Duration:</label>
+                    <input id="duration" class="form-control" value="{{ object.duration }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <label for="description">Description:</label>
+                    <textarea id="description" class="form-control">{{ object.description }}</textarea>
+                </div> 
+            </div>
+        </fieldset>
+    </form>
+    <br>
+    <button class="btn btn-secondary" hx-trigger="click" hx-get="{{object.get_edit_url}}" hx-target="#training-{{object.id}}">Edit</button>
+
+
+</div>
+
+
+
+    

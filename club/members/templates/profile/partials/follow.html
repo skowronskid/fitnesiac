@@ -1,0 +1,3 @@
+<p id="follow_button">
+    <a  class="btn btn-primary" hx-post='{{ userprofile.get_follow_url }}' hx-target='#follow_button' hx-swap="outerHTML" href={{userprofile.get_follow_url}} hx-headers = '{"X-CSRFToken": "{{csrf_token}}"}'>Follow</a>
+</p>

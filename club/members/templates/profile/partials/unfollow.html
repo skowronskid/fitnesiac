@@ -1,0 +1,4 @@
+<p id="unfollow_button">
+    <a class="btn btn-primary" hx-post='{{ userprofile.get_unfollow_url }}' hx-target='#unfollow_button' hx-swap="outerHTML" href={{userprofile.get_unfollow_url}} hx-headers = '{"X-CSRFToken": "{{csrf_token}}"}'>Unfollow</a>
+</p>
+

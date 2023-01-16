@@ -1,0 +1,17 @@
+<div id = 'training-container'>
+
+        <form action="." method=POST hx-post="." hx-swap="outerHTML" hx-trigger='{% if form.instance.id %}change delay:500ms,{% endif %} submit'>
+            {% csrf_token %}
+
+            <form id="myform" action="" method=POST>
+                {% csrf_token %}
+
+                {% include 'events/partials/training-form.html' %}
+
+                <input type="submit" value="Save" class="btn btn-success">
+            {% if message %}
+            <p>{{message}}</p>
+            {% endif %} 
+        </form> 
+        
+</div>

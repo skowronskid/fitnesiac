@@ -1,0 +1,86 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <h1>Exercises List</h1> 
+
+    <form action="" method="GET">
+        {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Exercise Name</label>
+              <input type="text" class="form-control" id="exercise_name" name="exercise_name" placeholder="Enter the exercise name">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Body Part</label>
+              <select class="form-control" id="exercise_bodyPart" name="exercise_bodyPart">
+                <option></option>
+                <option>waist</option>
+                <option>upper legs</option>
+                <option>back</option>
+                <option>lower legs</option>
+                <option>back</option>
+                <option>chest</option>
+                <option>upper arms</option>
+                <option>cardio</option>
+                <option>shoulders</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect2">Equipment</label>
+              <select class="form-control" id="exercise_equipment" name="exercise_equipment">
+                <option></option>
+                <option>body weight</option>
+                <option>cable</option>
+                <option>leverage machine</option>
+                <option>assisted</option>
+                <option>medicine ball</option>
+                <option>stability ball</option>
+                <option>band</option>
+                <option>barbell</option>
+                <option>dumbbell</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-secondary">Submit</button>
+          </form>
+
+    <table>
+        <tr>
+            <th>Exercise Name</th>
+            <th>Target</th>
+            <th>Body Part</th>
+            <th>Equipment</th>
+        </tr>
+
+        {% for exercise in exercise_list %} 
+        <tr>
+            <td>{{exercise.target}}</td>
+            <td>{{exercise.name}}</td>
+            <td>{{exercise.bodyPart}}</td>
+            <td>{{exercise.equipment}}</td>
+            <!-- <td id="hover-element-{{ forloop.counter }}">See Gif</td> -->
+
+            <td>
+              <a href="{{ exercise.gifUrl }}" class="gif-link">See Exercise</a>
+
+              <style>
+              .gif-link:hover img {
+                  display: block;
+              }
+              </style>
+              <img src="{{ exercise.gifUrl }}" style="display: none;" alt="Gif for {{ exercise.target }}">
+            </td>
+
+        </tr>
+
+
+        {% endfor %} 
+
+    </table>
+
+    {% else %} 
+    <h2>You must be logged in</h2>
+
+    <a href="{% url 'login' %}">Login here</a>
+    {% endif %} 
+{% endblock %}

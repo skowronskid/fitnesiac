@@ -1,0 +1,56 @@
+{% extends 'events/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if user.is_authenticated %} 
+<center>
+    <h1>Add Training To Database</h1>
+    <br/><br/>
+    {% if submitted %} 
+        Your training was submitted successfully!!!
+    {% else %} 
+    
+    <form id="myform" action="" method=POST>
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-4">
+                {{form.name|as_crispy_field}}
+            </div> 
+            <div class="col-4">
+                {{form.date|as_crispy_field}}
+            </div>
+            <div class="col-2">
+                {{form.start_time|as_crispy_field}}
+            </div>
+            <div class="col-2">
+                {{form.end_time|as_crispy_field}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                {{form.description|as_crispy_field}}
+            </div> 
+            <div class="col-4">
+                {{form.show_to|as_crispy_field}}
+            </div>
+        </div>
+
+        <input type="submit" value="Save and add exercises" class="btn btn-success">
+
+   
+    </form> 
+    {% load static %} 
+    <script src="{% static 'js/validate_training.js' %}"></script>
+    {% endif %} 
+</center>
+
+{% else %} 
+<h2>You must be logged in</h2>
+
+<a href="{% url 'login' %}">Login here</a>
+{% endif %} 
+
+{% endblock %}

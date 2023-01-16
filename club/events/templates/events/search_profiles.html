@@ -1,0 +1,15 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+{% if searched %}
+    Here are the profiles:
+    <ul>
+    {% for userprofile in userprofiles %}
+
+        <li><a href="{{userprofile.get_profile_url}}">{{ userprofile.username }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+
+{% endblock content %}

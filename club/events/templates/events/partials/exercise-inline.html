@@ -1,0 +1,18 @@
+
+<div class='d-flex p-2  w-100' id="exercise-{{object.id}}">
+    <div class="mr-auto">
+        <em>{{ object.exercise}}</em> - {{object.weight}} {{object.unit}} | {{object.sets}}x{{object.reps}}
+    </div>
+
+    <!-- nie wyswietlam przyciskow do edycji jak w  card-training lub gdy uzytkownik nie jest wlascicielem -->
+    {% if not in_card and object.training.user == request.user  %} 
+    <div class="ml-auto">
+        <button class="btn btn-warning btn-sm pr-3 pl-3" hx-trigger="click" hx-get="{{object.get_edit_url}}" hx-target="#exercise-{{object.id}}" hx-swap="outerHTML">Edit</button>
+    
+        <button class="btn btn-danger btn-sm" hx-post='{{ object.get_delete_url }}' hx-confirm='Delete exercise?' hx-trigger='click' href='{{ object.get_delete_url }}'
+            hx-target='#exercise-{{ object.id }}' hx-swap='outerHTML' hx-headers = '{"X-CSRFToken": "{{csrf_token}}"}'>Remove</button>
+    </div>
+    {% endif %}
+</div>
+
+

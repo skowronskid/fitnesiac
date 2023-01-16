@@ -1,0 +1,71 @@
+<div class="card">
+    <div class="card-header d-flex">
+        <div>
+        <img class="miniature-photo" src="{{object.user.userprofile.photo.url}}"> 
+        </div>
+        <div class="p-2" ><b> <a class='badge badge-pill badge-primary' href="{{object.user.userprofile.get_profile_url}}">{{ object.user.username }}</a> - {{ object.date }}</b>  </div>
+        {% if object.user == request.user %}
+            <a class="btn btn-secondary ml-auto"  href="/{{training.id}}/edit/">Edit</a>
+        {% endif %}
+    </div>
+    <div class="card-body pb-0">
+
+        <div class="card-training-clickable">
+            <h3 class="card-title">{{ object.name }}</h3>
+            <p class="card-text">
+                {% if training.description %}
+                    <span>{{training.description}}</span>
+                {% endif %}
+            
+
+                <ul>
+                    {% for exercise in object.get_exercises_children %}
+                    <li>
+                        {% include 'events/partials/exercise-inline.html' with object=exercise %} 
+                    </li> 
+                    {% endfor %}
+                </ul>
+            </p>
+            <a id="toggle-trainingcomments-{{object.id}}" href="#"><span class="card-link-spanner"></span></a>
+
+        </div>
+    </div>
+
+    <hr class="p-0 m-0">
+    {% if object.has_comments %}
+        <div class="card-body p-2" id="trainingcomments-{{object.id}}" >
+        {% for comment in object.get_comments_children %}
+            {% include 'events/partials/comment-inline.html' with object=comment %} 
+        {% endfor %}
+        </div>
+    {% endif %}
+    {% if  request.user.is_authenticated %} 
+
+    <div id="comment-add-{{object.id}}">
+
+    <hr class="p-0 m-0">
+
+    
+    </div>
+    <a class="badge badge-dark mr-auto m-2" hx-get="{% url 'comment-add' parent_id=object.id %}" hx-prevent hx-trigger="click" hx-target="#comment-add-{{object.id}}" hx-swap="beforeend" href="#">
+        Comment
+    </a>
+    {% endif %}
+
+</div>
+<br>
+   
+
+
+{% block scripts %}
+<script>
+function toggleTrainingComments() {
+    document.getElementById('toggle-trainingcomments-{{object.id}}').addEventListener('click', function(event) {
+        event.preventDefault();
+        $('#trainingcomments-{{object.id}}').fadeToggle();
+    });
+}
+
+toggleTrainingComments();  // Call the function directly
+</script>
+{% endblock scripts %}

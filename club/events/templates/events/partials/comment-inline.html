@@ -1,0 +1,26 @@
+<div id="comment-{{object.id}}">
+
+    <div class="d-flex">
+
+        <div>
+            <img class="miniature-photo" src="{{object.user.userprofile.photo.url}}"> 
+        </div>
+        
+        <div class="p-2" >
+            <b>  <a class='badge badge-pill badge-primary' href="{{object.user.userprofile.get_profile_url}}">{{ object.user.username }}</a><small class="text-muted"> - {{object.date_updated}}</small></b>  
+            {% if  object.training.user == request.user or object.user == request.user %} 
+
+                <a class="badge badge-dark" hx-post='{{ object.get_delete_url }}' hx-confirm='Delete comment?' hx-trigger='click' href='{{ object.get_delete_url }}'
+                    hx-target='#comment-{{ object.id }}' hx-swap='outerHTML' hx-headers = '{"X-CSRFToken": "{{csrf_token}}"}'>Remove</a>
+
+            {% endif %}
+        </div>
+    </div>
+    
+<p class="comment-text">{{ object.text}} </p>
+ 
+
+
+    
+
+</div>

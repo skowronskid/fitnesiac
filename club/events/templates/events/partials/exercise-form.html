@@ -1,0 +1,33 @@
+{% load crispy_forms_tags %}
+    <form class='row w-100' action="" method=POST hx-post="{% if url %}{{ url }}{% else %}.{% endif %}" hx-swap="outerHTML">
+        {% csrf_token %}
+        
+
+            <div class="col-3">
+                {{form.exercise|as_crispy_field}}
+            </div>
+            <div class="col-2">
+                {{form.weight|as_crispy_field}}
+            </div>
+            <div class="col-2">
+                {{form.unit|as_crispy_field}}
+            </div>
+            <div class="col-2">
+                {{form.sets|as_crispy_field}}
+                
+            </div>
+            <div class="col-2">
+                {{form.reps|as_crispy_field}}
+            </div>
+
+            <div class="col-1">
+                <label for="save"> &nbsp  </label> 
+                <input id="save "type="submit" value="Save" class="btn btn-success">
+            </div>
+
+    
+        
+
+        
+        
+    </form> 

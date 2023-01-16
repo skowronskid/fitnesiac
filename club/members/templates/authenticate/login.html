@@ -1,0 +1,54 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+    <h1>Login</h1>
+    
+    <div class="card">
+        
+        
+            {% if login_message or message %}
+                <div class="card-header">
+                    {% if login_message %}
+                    <div class="alert alert-succes">
+                        {{ login_message }}
+                    </div>
+
+                    {% elif message  %}
+                    <div class="alert alert-warning">
+                        {{ message }}
+
+                    </div>
+                    {% endif %}
+                </div>
+                    
+            {% endif %}
+
+       
+
+
+        <div class="card-body">
+            <form action="" method="POST">
+                    {% csrf_token %} 
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                        </div>
+                        <div class="col-6">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                    </div>
+                    <center>
+                    <a href="{% url 'reset_password' %}">Forgot password</a>
+                    <br>
+                    <button type="submit" class="btn btn-secondary">Submit</button>
+                    </center>
+                </form>
+        </div>
+      
+    </div>
+
+
+
+{% endblock %}
